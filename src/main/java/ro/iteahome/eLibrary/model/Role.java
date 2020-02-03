@@ -4,6 +4,8 @@ public abstract class Role {
     private int roleId;
     private String name;
 
+    // 1- Admin ; 2 - Reader
+
     Role(int roleId, String name) {
         this.roleId = roleId;
         this.name = name;

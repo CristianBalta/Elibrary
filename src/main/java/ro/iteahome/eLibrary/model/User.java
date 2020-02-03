@@ -15,6 +15,9 @@ public class User {
         this.role = role;
     }
 
+    public User(String userValue, String userValue1, String userValue2, String userValue3, String userValue4) {
+    }
+
     public int getUserId() {
         return userId;
     }
