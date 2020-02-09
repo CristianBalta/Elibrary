@@ -15,6 +15,10 @@ public class Book {
         this.numberOf = numberOf;
     }
 
+    public Book() {
+
+    }
+
     public int getBookId() {
         return BookId;
     }
