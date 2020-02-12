@@ -19,7 +19,7 @@ public class UserDao {
             String userLine = userReader.readLine();
             String[] userValues = userLine.split(";");
 
-            userList.add(new User(userValues[0], userValues[1], userValues[2], userValues[3], userValues[4]));
+            userList.add(new User(Integer.valueOf(userValues[0].trim()), userValues[1].trim(), userValues[2].trim(), userValues[3].trim(), Integer.valueOf(userValues[4].trim())));
         } catch (IOException e) {
             throw new LibraryFileException("Error reading users", e);
         }

@@ -1,5 +1,6 @@
 package ro.iteahome.eLibrary.ui;
 
+import ro.iteahome.eLibrary.service.Top5Books;
 import ro.iteahome.eLibrary.exception.LibraryException;
 import ro.iteahome.eLibrary.exception.LibraryTechnicalException;
 import ro.iteahome.eLibrary.exception.LibraryWrongCredentialException;
@@ -17,33 +18,35 @@ public class Console {
     public Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
 
     public void displayLogin() {
-        System.out.println("Name: ");
+        System.out.println("Login Name: ");
         String name = scanner.nextLine();
-        System.out.println("Password: ");
+        System.out.println("Login Password: ");
         String password = scanner.nextLine();
+
+        User user = null;
+
         try {
-            User user = userService.login(name, password);
+            user = userService.login(name, password);
             System.out.println("User successfully login");
         } catch (LibraryWrongCredentialException e) {
             System.out.println("Wrong Credentials");
         } catch (LibraryTechnicalException e) {
-            e.printStackTrace();
-            System.out.println("A system error appeared. Please contact your administrator");
+           // e.printStackTrace();
+            System.out.println("A system error appeared. Please contact your administrator; "+e.getMessage());
         } catch (LibraryException e) {
             e.printStackTrace();
         }
-        try {
-            if (userService.login(name, password).getRole()==1){
-                showMenuAdmin();
-            } else {
-                showMenuReader();
-            }
-        } catch (LibraryException e) {
-            e.printStackTrace();
+
+
+        if (user.isAdmin()) {
+            showMenuAdmin();
+        } else {
+            showMenuReader();
         }
+
     }
 
-    private void showMenuAdmin(){
+    private void showMenuAdmin() {
         System.out.println();
         System.out.println("1. Top 5 books as per number of people who borrowed them ");
         System.out.println("2. The most read author");
@@ -55,9 +58,10 @@ public class Console {
         System.out.println("x. Exit");
         System.out.println();
         System.out.print("Choose an option: ");
+        startConsole();
     }
 
-    private void showMenuReader(){
+    private void showMenuReader() {
         System.out.println();
         System.out.println("1. Top 5 books as per number of people who borrowed them ");
         System.out.println("2. The most read author");
@@ -70,12 +74,16 @@ public class Console {
     }
 
     public void startConsole() {
+
         etichetaWhile:
         while (true) {
-            displayLogin();
+            //displayLogin();
+
             String optiune = scanner.next();
             switch (optiune) {
                 case "1":
+                    System.out.println("Ai ales optiunea 1");
+                    new Top5Books().executa();
                     // in progress Top 5 books as per number of people who borrowed them
                     break;
                 case "2":
@@ -108,7 +116,6 @@ public class Console {
             }
         }
     }
-
 
 
 }
