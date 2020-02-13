@@ -6,6 +6,7 @@ import ro.iteahome.eLibrary.model.User;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class UserDao {
 
@@ -13,15 +14,19 @@ public class UserDao {
 
     public List<User> readAllUsers() throws LibraryTechnicalException {
         List<User> userList = new ArrayList<>();
-        try (BufferedReader userReader = new BufferedReader(new FileReader(USERS_FILE))) {
-            String userLine = userReader.readLine();
-            String[] userValues = userLine.split(";");
+        Scanner scannerText=null;
+        try {
+            scannerText=new Scanner(new BufferedReader(new FileReader(USERS_FILE)));
+            String userLine="";
+            while(scannerText.hasNextLine()){
+                userLine = scannerText.nextLine();
+                String[] userValues = userLine.split(";");
 
-            userList.add(new User(Integer.valueOf(userValues[0].trim()), userValues[1].trim(), userValues[2].trim(), userValues[3].trim(), Integer.parseInt(userValues[4].trim())));
+                userList.add(new User(Integer.valueOf(userValues[0].trim()), userValues[1].trim(), userValues[2].trim(), userValues[3].trim(), Integer.parseInt(userValues[4].trim())));
+            }
         } catch (IOException e) {
             throw new LibraryFileException("Error reading users", e);
         }
-
         return userList;
     }
 

@@ -6,9 +6,12 @@ public class MainUI {
 
     Console console = new Console();
 
-    public void start (){
-        System.out.println("eLibrary");
+    public void showTitle(){
+        System.out.println("........eLibrary.......");
         System.out.println();
+    }
+    public void start (){
+
         System.out.println("1.SignUp");
         System.out.println("2.LogIn");
         System.out.println("3.Exit");

@@ -10,7 +10,6 @@ import ro.iteahome.eLibrary.model.User;
 import ro.iteahome.eLibrary.service.UserService;
 import ro.iteahome.eLibrary.ui.userValidator.UserValidator;
 
-import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -25,6 +24,7 @@ public class Console {
     public Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
 
     public void displaySignUp() {
+        System.out.println("SIGN UP");
         System.out.println("Enter the name :");
         String name = scanner.nextLine();
         System.out.println("Enter the email with which you want to register: ");
@@ -37,19 +37,14 @@ public class Console {
 
         try {
             //userValidator.validateUserCredentials(email, password);
-//            userToAdd.setUserId(userId);
-//            userToAdd.setName(name);
-//            userToAdd.setEmail(email);
-//            userToAdd.setPassword(password);
-//            userToAdd.setRole(role);
-//            userService.signUp(userToAdd);
            // User user2 = new User((userDao.readAllUsers().size())+1,name,email,password,role);
             //User user2 = new User(count.incrementAndGet(),name,email,password,role);
             User user2 = new User(0,name,email,password,role);
+            //userValidator.validateUserCredentials(user2.getName(), user2.getPassword());
             userService.signUp(user2);
             System.out.println("User " + email +" is successfully registered now!!! ");
+            System.out.println("...................................................");
             //System.out.println(user2.getUserId() + user2.getName() +user2.getEmail()+user2.getPassword()+user2.getRole());
-
         } catch (LibraryUserExistsAlready e){
             System.out.println("User already exists! ");
         } catch (LibraryWrongCredentialException e) {
@@ -63,6 +58,7 @@ public class Console {
     }
 
     public void displayLogin() {
+        System.out.println("LOG IN");
         System.out.println("Login Name: ");
         String name = scanner.nextLine();
         System.out.println("Login Password: ");
@@ -72,7 +68,7 @@ public class Console {
 
         try {
             user = userService.login(name, password);
-            System.out.println("User successfully login");
+            System.out.println("User successfully logged in");
         } catch (LibraryWrongCredentialException e) {
             System.out.println("Wrong Credentials");
         } catch (LibraryTechnicalException e) {
