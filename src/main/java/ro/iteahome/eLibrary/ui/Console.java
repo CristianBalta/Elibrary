@@ -1,5 +1,7 @@
 package ro.iteahome.eLibrary.ui;
 
+import ro.iteahome.eLibrary.dao.UserDao;
+import ro.iteahome.eLibrary.exception.LibraryUserExistsAlready;
 import ro.iteahome.eLibrary.service.Top5Books;
 import ro.iteahome.eLibrary.exception.LibraryException;
 import ro.iteahome.eLibrary.exception.LibraryTechnicalException;
@@ -8,14 +10,57 @@ import ro.iteahome.eLibrary.model.User;
 import ro.iteahome.eLibrary.service.UserService;
 import ro.iteahome.eLibrary.ui.userValidator.UserValidator;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Console {
 
+    //private static final AtomicInteger count = new AtomicInteger(1);
+
+    private UserDao userDao = new UserDao();
     private UserService userService = new UserService();
     private UserValidator userValidator = new UserValidator();
 
     public Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
+
+    public void displaySignUp() {
+        System.out.println("Enter the name :");
+        String name = scanner.nextLine();
+        System.out.println("Enter the email with which you want to register: ");
+        String email = scanner.nextLine();
+        System.out.println("Enter the password associated with the email: ");
+        String password = scanner.nextLine();
+        System.out.println("Enter role");
+        int role = scanner.nextInt();
+
+
+        try {
+            //userValidator.validateUserCredentials(email, password);
+//            userToAdd.setUserId(userId);
+//            userToAdd.setName(name);
+//            userToAdd.setEmail(email);
+//            userToAdd.setPassword(password);
+//            userToAdd.setRole(role);
+//            userService.signUp(userToAdd);
+           // User user2 = new User((userDao.readAllUsers().size())+1,name,email,password,role);
+            //User user2 = new User(count.incrementAndGet(),name,email,password,role);
+            User user2 = new User(0,name,email,password,role);
+            userService.signUp(user2);
+            System.out.println("User " + email +" is successfully registered now!!! ");
+            //System.out.println(user2.getUserId() + user2.getName() +user2.getEmail()+user2.getPassword()+user2.getRole());
+
+        } catch (LibraryUserExistsAlready e){
+            System.out.println("User already exists! ");
+        } catch (LibraryWrongCredentialException e) {
+            System.out.println("Invalid credentials ! ");
+        } catch (LibraryTechnicalException e) {
+            e.printStackTrace();
+            System.out.println("A system error appeared. Please contact your administrator");
+        } catch (LibraryException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void displayLogin() {
         System.out.println("Login Name: ");
