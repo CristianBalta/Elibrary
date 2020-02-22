@@ -2,6 +2,7 @@ package ro.iteahome.eLibrary.service;
 
 import ro.iteahome.eLibrary.dao.UserDao;
 import ro.iteahome.eLibrary.exception.LibraryException;
+import ro.iteahome.eLibrary.exception.LibraryUserExistsAlready;
 import ro.iteahome.eLibrary.exception.LibraryWrongCredentialException;
 import ro.iteahome.eLibrary.model.User;
 
@@ -17,5 +18,20 @@ public class UserService {
         }
 
         throw new LibraryWrongCredentialException();
+    }
+
+    public void signUp(User addedUser) throws LibraryException {
+
+        boolean userExists = false;
+        for (User user : userDao.readAllUsers()) {
+            if (addedUser.getEmail().equalsIgnoreCase(user.getEmail())) {
+                userExists = true;
+                throw new LibraryUserExistsAlready();
+            }
+        }
+
+        if (!userExists) {
+            userDao.writeUserToFile(addedUser);
+        }
     }
 }

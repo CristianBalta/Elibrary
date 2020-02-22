@@ -1,5 +1,8 @@
 package ro.iteahome.eLibrary.ui;
 
+import ro.iteahome.eLibrary.dao.UserDao;
+import ro.iteahome.eLibrary.exception.LibraryUserExistsAlready;
+import ro.iteahome.eLibrary.service.Top5Books;
 import ro.iteahome.eLibrary.exception.LibraryException;
 import ro.iteahome.eLibrary.exception.LibraryTechnicalException;
 import ro.iteahome.eLibrary.exception.LibraryWrongCredentialException;
@@ -8,42 +11,83 @@ import ro.iteahome.eLibrary.service.UserService;
 import ro.iteahome.eLibrary.ui.userValidator.UserValidator;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Console {
 
+    //private static final AtomicInteger count = new AtomicInteger(1);
+
+    private UserDao userDao = new UserDao();
     private UserService userService = new UserService();
     private UserValidator userValidator = new UserValidator();
 
     public Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
 
-    public void displayLogin() {
-        System.out.println("Name: ");
+    public void displaySignUp() {
+        System.out.println("SIGN UP");
+        System.out.println("Enter the name :");
         String name = scanner.nextLine();
-        System.out.println("Password: ");
+        System.out.println("Enter the email with which you want to register: ");
+        String email = scanner.nextLine();
+        System.out.println("Enter the password associated with the email: ");
         String password = scanner.nextLine();
+        System.out.println("Enter role");
+        int role = scanner.nextInt();
+
+
         try {
-            User user = userService.login(name, password);
-            System.out.println("User successfully login");
+            //userValidator.validateUserCredentials(email, password);
+           // User user2 = new User((userDao.readAllUsers().size())+1,name,email,password,role);
+            //User user2 = new User(count.incrementAndGet(),name,email,password,role);
+            User user2 = new User(0,name,email,password,role);
+            //userValidator.validateUserCredentials(user2.getName(), user2.getPassword());
+            userService.signUp(user2);
+            System.out.println("User " + email +" is successfully registered now!!! ");
+            System.out.println("...................................................");
+            //System.out.println(user2.getUserId() + user2.getName() +user2.getEmail()+user2.getPassword()+user2.getRole());
+        } catch (LibraryUserExistsAlready e){
+            System.out.println("User already exists! ");
         } catch (LibraryWrongCredentialException e) {
-            System.out.println("Wrong Credentials");
+            System.out.println("Invalid credentials ! ");
         } catch (LibraryTechnicalException e) {
             e.printStackTrace();
             System.out.println("A system error appeared. Please contact your administrator");
         } catch (LibraryException e) {
             e.printStackTrace();
         }
+    }
+
+    public void displayLogin() {
+        System.out.println("LOG IN");
+        System.out.println("Login Name: ");
+        String name = scanner.nextLine();
+        System.out.println("Login Password: ");
+        String password = scanner.nextLine();
+
+        User user = null;
+
         try {
-            if (userService.login(name, password).getRole()==1){
-                showMenuAdmin();
-            } else {
-                showMenuReader();
-            }
+            user = userService.login(name, password);
+            System.out.println("User successfully logged in");
+        } catch (LibraryWrongCredentialException e) {
+            System.out.println("Wrong Credentials");
+        } catch (LibraryTechnicalException e) {
+           // e.printStackTrace();
+            System.out.println("A system error appeared. Please contact your administrator; "+e.getMessage());
         } catch (LibraryException e) {
             e.printStackTrace();
         }
+
+
+        if (user.isAdmin()) {
+            showMenuAdmin();
+        } else {
+            showMenuReader();
+        }
+
     }
 
-    private void showMenuAdmin(){
+    private void showMenuAdmin() {
         System.out.println();
         System.out.println("1. Top 5 books as per number of people who borrowed them ");
         System.out.println("2. The most read author");
@@ -55,9 +99,10 @@ public class Console {
         System.out.println("x. Exit");
         System.out.println();
         System.out.print("Choose an option: ");
+        startConsole();
     }
 
-    private void showMenuReader(){
+    private void showMenuReader() {
         System.out.println();
         System.out.println("1. Top 5 books as per number of people who borrowed them ");
         System.out.println("2. The most read author");
@@ -70,12 +115,16 @@ public class Console {
     }
 
     public void startConsole() {
+
         etichetaWhile:
         while (true) {
-            displayLogin();
+            //displayLogin();
+
             String optiune = scanner.next();
             switch (optiune) {
                 case "1":
+                    System.out.println("Ai ales optiunea 1");
+                    new Top5Books().executa();
                     // in progress Top 5 books as per number of people who borrowed them
                     break;
                 case "2":
@@ -108,7 +157,6 @@ public class Console {
             }
         }
     }
-
 
 
 }
