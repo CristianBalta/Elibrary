@@ -23,6 +23,12 @@ public class Loan {
 
     }
 
+    public Loan(int loanId, int userId, Date loanDate) {
+        this.loanId = loanId;
+        this.userId = userId;
+        this.loanDate = loanDate;
+    }
+
     public int getLoanId() {
         return loanId;
     }
