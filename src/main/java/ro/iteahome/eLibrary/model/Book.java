@@ -15,6 +15,10 @@ public class Book {
         this.numberOf = numberOf;
     }
 
+    public Book() {
+
+    }
+
     public int getBookId() {
         return BookId;
     }
@@ -45,5 +49,10 @@ public class Book {
 
     public void setNumberOf(int numberOf) {
         this.numberOf = numberOf;
+    }
+
+    @Override
+    public String toString() {
+        return name + ": " + authorList;
     }
 }

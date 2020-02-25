@@ -13,6 +13,9 @@ public class Author {
         this.bookList = bookList;
     }
 
+    public Author() {
+    }
+
     public int getAuthorId() {
         return authorId;
     }
@@ -35,5 +38,10 @@ public class Author {
 
     public void setBookList(List<Book> bookList) {
         this.bookList = bookList;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

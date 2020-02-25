@@ -6,11 +6,12 @@ public class MainUI {
 
     Console console = new Console();
 
-    public void showTitle(){
+    public void showTitle() {
         System.out.println("........eLibrary.......");
         System.out.println();
     }
-    public void start (){
+
+    public void start() {
 
         System.out.println("1.SignUp");
         System.out.println("2.LogIn");
@@ -21,20 +22,20 @@ public class MainUI {
         Scanner scanner = new Scanner(System.in);
 
         // infinite loop
-        for(;;) {
+        for (; ; ) {
             String option = scanner.nextLine();
 
-            if (option.equalsIgnoreCase("1")){
+            if (option.equalsIgnoreCase("1")) {
                 console.displaySignUp();
                 break;
             }
 
-            if (option.equalsIgnoreCase("2")){
+            if (option.equalsIgnoreCase("2")) {
                 console.displayLogin();
                 break;
             }
 
-            if (option.equalsIgnoreCase("3")){
+            if (option.equalsIgnoreCase("3")) {
                 break;
             } else {
                 System.out.println("This option is invalid ! Choose a valid option (1 , 2 , 3) !");

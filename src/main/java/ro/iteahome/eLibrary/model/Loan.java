@@ -6,17 +6,21 @@ import java.util.List;
 public class Loan {
 
     private int loanId;
-    private List<Book> bookList;
+    private int userId;
     private Date loanDate;
-    private Date returnDate;
-    private String status;
+    private List<Book> bookList;
 
-    public Loan(int loanId, List<Book> bookList, Date loanDate, Date returnDate, String status) {
+
+    public Loan(int loanId, int userId, List<Book> bookList, Date loanDate) {
         this.loanId = loanId;
+        this.userId = userId;
         this.bookList = bookList;
         this.loanDate = loanDate;
-        this.returnDate = returnDate;
-        this.status = status;
+
+    }
+
+    public Loan() {
+
     }
 
     public int getLoanId() {
@@ -25,6 +29,14 @@ public class Loan {
 
     public void setLoanId(int loanId) {
         this.loanId = loanId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public List<Book> getBookList() {
@@ -43,19 +55,4 @@ public class Loan {
         this.loanDate = loanDate;
     }
 
-    public Date getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }
