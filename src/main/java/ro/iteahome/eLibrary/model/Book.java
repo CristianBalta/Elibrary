@@ -50,4 +50,9 @@ public class Book {
     public void setNumberOf(int numberOf) {
         this.numberOf = numberOf;
     }
+
+    @Override
+    public String toString() {
+        return name + ": " + authorList;
+    }
 }

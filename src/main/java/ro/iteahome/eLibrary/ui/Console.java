@@ -2,7 +2,7 @@ package ro.iteahome.eLibrary.ui;
 
 import ro.iteahome.eLibrary.dao.UserDao;
 import ro.iteahome.eLibrary.exception.LibraryUserExistsAlready;
-import ro.iteahome.eLibrary.service.Top5Books;
+//import ro.iteahome.eLibrary.service.Top5Books;
 import ro.iteahome.eLibrary.exception.LibraryException;
 import ro.iteahome.eLibrary.exception.LibraryTechnicalException;
 import ro.iteahome.eLibrary.exception.LibraryWrongCredentialException;
@@ -124,7 +124,7 @@ public class Console {
             switch (optiune) {
                 case "1":
                     System.out.println("Ai ales optiunea 1");
-                    new Top5Books().executa();
+                   // new Top5Books().executa();
                     // in progress Top 5 books as per number of people who borrowed them
                     break;
                 case "2":
