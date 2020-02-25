@@ -3,10 +3,7 @@ package ro.iteahome.eLibrary.ui;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import ro.iteahome.eLibrary.dao.LoanDao;
 import ro.iteahome.eLibrary.model.Author;
@@ -22,6 +19,7 @@ public class LoanWriterUI {
 
         Loan loan = new Loan();
         loan.setLoanDate(new Date());
+
 
         Scanner s = new Scanner(System.in);
 
