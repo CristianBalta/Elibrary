@@ -1,10 +1,5 @@
 package ro.iteahome.eLibrary;
 
-
-import ro.iteahome.eLibrary.service.CommonDay;
-import ro.iteahome.eLibrary.service.LoanWriter;
-import ro.iteahome.eLibrary.service.TopAuthor;
-import ro.iteahome.eLibrary.ui.LoanWriterUI;
 import ro.iteahome.eLibrary.ui.MainUI;
 
 import java.io.IOException;
@@ -17,7 +12,7 @@ public class Application {
 
         // CommonDay commonDay = new CommonDay();
        // TopAuthor topAuthor = new TopAuthor();
-
+       // TopUserInSixMonthsUI topUserInSixMonthsUI  =new TopUserInSixMonthsUI();
         MainUI mainUI = new MainUI();
         mainUI.showTitle();
         mainUI.start();
