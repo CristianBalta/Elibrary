@@ -17,7 +17,6 @@ public class CommonDayDao {
 
 
     public int useriddao = 0;
-    public String dateread;
     public List<Loan> loanlistdao = new ArrayList<>();
     public Date date;
     int[] busyday = new int[7];
@@ -27,14 +26,14 @@ public class CommonDayDao {
 
     }
 
-    public CommonDayDao(int useriddao, String dataread) throws FileNotFoundException, IOException {
+    public CommonDayDao(int useriddao) throws FileNotFoundException, IOException {
 
         this.useriddao = useriddao;
-        this.dateread = dataread;
 
     }
 
-    public void computeCommonDay() throws IOException {
+
+    public String computeCommonDay() throws IOException {
         FileReader reader = new FileReader(LOANS_FILE);
         BufferedReader br = new BufferedReader(reader);
 
@@ -42,9 +41,9 @@ public class CommonDayDao {
 
         while ((line = br.readLine()) != null) {
 
-            String[] loanstringinfo = line.split("; ", 3);
+            String[] loanstringinfo = line.split("; ");
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             String dateInString = loanstringinfo[2];
 
             try {
@@ -63,75 +62,79 @@ public class CommonDayDao {
 
 
         for (Loan loaninfo : loanlistdao) {
-            SimpleDateFormat simpleDateformat = new SimpleDateFormat("E");
-            simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
-            String weekDay = simpleDateformat.format(loaninfo.getLoanDate());
+            if (loaninfo.getUserId() == useriddao) {
+                SimpleDateFormat simpleDateformat = new SimpleDateFormat("E");
+                simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
+                String weekDay = simpleDateformat.format(loaninfo.getLoanDate());
 
-            switch (weekDay) {
-                case "Monday":
-                    busyday[0]++;
-                    break;
-                case "Tuesday":
-                    busyday[1]++;
-                    break;
-                case "Wednesday":
-                    busyday[2]++;
-                    break;
-                case "Thursday":
-                    busyday[3]++;
-                    break;
-                case "Friday":
-                    busyday[4]++;
-                    break;
-                case "Saturady":
-                    busyday[5]++;
-                    break;
-                case "Sunday":
-                    busyday[6]++;
-                    break;
-                default:
-                    break;
+                switch (weekDay) {
+                    case "Monday":
+                        busyday[0]++;
+                        break;
+                    case "Tuesday":
+                        busyday[1]++;
+                        break;
+                    case "Wednesday":
+                        busyday[2]++;
+                        break;
+                    case "Thursday":
+                        busyday[3]++;
+                        break;
+                    case "Friday":
+                        busyday[4]++;
+                        break;
+                    case "Saturady":
+                        busyday[5]++;
+                        break;
+                    case "Sunday":
+                        busyday[6]++;
+                        break;
+                    default:
+                        break;
 
-            }
+                }
 
-            IntSummaryStatistics stat = Arrays.stream(busyday).summaryStatistics();
-            int max = stat.getMin();
+                IntSummaryStatistics stat = Arrays.stream(busyday).summaryStatistics();
+                int max = stat.getMax();
+                int max2 = 0;
 
-            for (int i = 0; i <= 6; i++) {
-                if (busyday[i] == max)
-                    max = i;
-            }
+                for (int i = 0; i <= 6; i++) {
+                    if (busyday[i] == max)
+                        max2 = i;
 
-            switch (max) {
-                case 0:
-                    theMostBusyDay = "Monday";
-                    break;
-                case 1:
-                    theMostBusyDay = "Tuesday";
-                    break;
-                case 2:
-                    theMostBusyDay = "Wednesday";
-                    break;
-                case 3:
-                    theMostBusyDay = "Thursday";
-                    break;
-                case 4:
-                    theMostBusyDay = "Friday";
-                    break;
-                case 5:
-                    theMostBusyDay = "Saturday";
-                    break;
-                case 6:
-                    theMostBusyDay = "Sunday";
-                    break;
-                default:
-                    theMostBusyDay = "isn't one";
-                    break;
+                }
+                switch (max2) {
+                    case 0:
+                        theMostBusyDay = "Monday";
+                        break;
+                    case 1:
+                        theMostBusyDay = "Tuesday";
+                        break;
+                    case 2:
+                        theMostBusyDay = "Wednesday";
+                        break;
+                    case 3:
+                        theMostBusyDay = "Thursday";
+                        break;
+                    case 4:
+                        theMostBusyDay = "Friday";
+                        break;
+                    case 5:
+                        theMostBusyDay = "Saturday";
+                        break;
+                    case 6:
+                        theMostBusyDay = "Sunday";
+                        break;
+                    default:
+                        theMostBusyDay = "isn't one";
+                        break;
 
+                }
             }
 
 
         }
+        return theMostBusyDay;
 
 
     }
