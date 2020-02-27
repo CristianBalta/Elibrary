@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import ro.iteahome.eLibrary.dao.LoanDao;
+import ro.iteahome.eLibrary.dao.LoanWriterDao;
 import ro.iteahome.eLibrary.model.Author;
 import ro.iteahome.eLibrary.model.Book;
 import ro.iteahome.eLibrary.model.Loan;
@@ -61,7 +61,7 @@ public class LoanWriterUI {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
         String strDate = dateFormat.format(loan.getLoanDate());
 
-        LoanDao loanui = new LoanDao(loan.getUserId(), strDate, loan.getBookList());
+        LoanWriterDao loanui = new LoanWriterDao(loan.getUserId(), strDate, loan.getBookList());
 
         LoanWriter loanWriter = new LoanWriter(loanui);
 

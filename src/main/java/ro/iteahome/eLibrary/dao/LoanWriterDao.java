@@ -7,7 +7,7 @@ import java.sql.SQLOutput;
 import java.util.List;
 
 
-public class LoanDao {
+public class LoanWriterDao {
 
     private static final String LOANS_FILE = "/Users/cristianbalta/Desktop/team-project-elibrary/src/main/java/ro/iteahome/eLibrary/loans.txt";
 
@@ -17,7 +17,7 @@ public class LoanDao {
     public String loandatedao;
     public List<Book> bookListdao;
 
-    public LoanDao(int loanuseriddao, String loandatedao, List<Book> bookListdao) throws FileNotFoundException, IOException {
+    public LoanWriterDao(int loanuseriddao, String loandatedao, List<Book> bookListdao) throws FileNotFoundException, IOException {
 
         this.loanuseriddao = loanuseriddao;
         this.loandatedao = loandatedao;
