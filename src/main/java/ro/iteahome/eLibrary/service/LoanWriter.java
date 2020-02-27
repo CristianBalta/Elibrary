@@ -1,6 +1,6 @@
 package ro.iteahome.eLibrary.service;
 
-import ro.iteahome.eLibrary.dao.LoanDao;
+import ro.iteahome.eLibrary.dao.LoanWriterDao;
 
 
 import java.io.IOException;
@@ -9,9 +9,9 @@ import java.io.IOException;
 public class LoanWriter {
 
 
-    LoanDao loandaoui;
+    LoanWriterDao loandaoui;
 
-    public LoanWriter(LoanDao loandaoui) throws IOException {
+    public LoanWriter(LoanWriterDao loandaoui) throws IOException {
         this.loandaoui = loandaoui;
         this.loandaoui.loanToFile();
 

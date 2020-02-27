@@ -1,6 +1,7 @@
 package ro.iteahome.eLibrary;
 
 
+import ro.iteahome.eLibrary.service.AuthorPopularBooks;
 import ro.iteahome.eLibrary.service.CommonDay;
 import ro.iteahome.eLibrary.service.LoanWriter;
 import ro.iteahome.eLibrary.service.TopAuthor;
@@ -16,7 +17,8 @@ public class Application {
         // acolo putem initializa loan-ul deci o sa fie o optiune a adminuli mai incolo
 
         // CommonDay commonDay = new CommonDay();
-       // TopAuthor topAuthor = new TopAuthor();
+        //TopAuthor topAuthor = new TopAuthor();
+        AuthorPopularBooks authorPopularBooks = new AuthorPopularBooks();
 
         MainUI mainUI = new MainUI();
         mainUI.showTitle();
