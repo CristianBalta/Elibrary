@@ -1,17 +1,17 @@
 package ro.iteahome.eLibrary.ui;
 
 import ro.iteahome.eLibrary.dao.UserDao;
-import ro.iteahome.eLibrary.exception.LibraryUserExistsAlready;
-//import ro.iteahome.eLibrary.service.Top5Books;
 import ro.iteahome.eLibrary.exception.LibraryException;
 import ro.iteahome.eLibrary.exception.LibraryTechnicalException;
+import ro.iteahome.eLibrary.exception.LibraryUserExistsAlready;
 import ro.iteahome.eLibrary.exception.LibraryWrongCredentialException;
 import ro.iteahome.eLibrary.model.User;
 import ro.iteahome.eLibrary.service.UserService;
 import ro.iteahome.eLibrary.ui.userValidator.UserValidator;
 
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
+
+//import ro.iteahome.eLibrary.service.Top5Books;
 
 public class Console {
 
@@ -20,6 +20,7 @@ public class Console {
     private UserDao userDao = new UserDao();
     private UserService userService = new UserService();
     private UserValidator userValidator = new UserValidator();
+    public static String  name;
 
     public Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
 
@@ -60,7 +61,7 @@ public class Console {
     public void displayLogin() {
         System.out.println("LOG IN");
         System.out.println("Login Name: ");
-        String name = scanner.nextLine();
+         name = scanner.nextLine();
         System.out.println("Login Password: ");
         String password = scanner.nextLine();
 
