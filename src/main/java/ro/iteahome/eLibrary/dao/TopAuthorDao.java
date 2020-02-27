@@ -1,10 +1,8 @@
 package ro.iteahome.eLibrary.dao;
 
-import ro.iteahome.eLibrary.service.TopAuthor;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Stream;
 
 
 public class TopAuthorDao {
@@ -13,6 +11,7 @@ public class TopAuthorDao {
 
 
     public ArrayList<String> topAuthorList = new ArrayList<>();
+    public ArrayList<String> demoBook = new ArrayList<>();
 
 
     public String topAuthor;
@@ -34,12 +33,18 @@ public class TopAuthorDao {
             String[] loanstringinfo = line.split("; ", 4);
             String rawLoan = loanstringinfo[3];
             rawLoan = rawLoan.substring(1, rawLoan.length() - 1);
-            rawLoan = rawLoan.substring(rawLoan.lastIndexOf("[") + 1, rawLoan.length() - 1);
-            String[] rawBook = rawLoan.split(", ");
+            String[] rawBook = rawLoan.split("], ");
 
+            for (String rawBookS : rawBook) {
+                if (rawBookS.lastIndexOf("]") == rawBookS.length() - 1) {
+                    rawBookS = rawBookS.substring(0, rawBookS.length() - 1);
+                }
+                rawBookS = rawBookS.substring(rawBookS.lastIndexOf("[") + 1);
+                String[] almostAuthor = rawBookS.split(", ");
+                for (String finalAuthor : almostAuthor) {
+                    topAuthorList.add(finalAuthor);
 
-            for (String finalAuthor : rawBook) {
-                topAuthorList.add(finalAuthor);
+                }
 
             }
 
