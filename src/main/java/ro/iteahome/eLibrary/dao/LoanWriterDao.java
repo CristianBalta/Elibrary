@@ -8,7 +8,6 @@ import java.util.List;
 
 public class LoanWriterDao {
 
-    //private static final String LOANS_FILE = "/Users/cristianbalta/Desktop/team-project-elibrary/src/main/java/ro/iteahome/eLibrary/loans.txt";
     File path = new File("./src/main/java/ro/iteahome/eLibrary/loans.txt");
 
     public int loaniddao = 0;

@@ -13,7 +13,7 @@ public class ReaderProfileDao {
     public static String id;
     public static String nameReader;
     public static String email;
-    //private static final String userFile = "C:\\Users\\Patrick\\IdeaProjects\\team-project-elibrary\\src\\main\\java\\ro\\iteahome\\eLibrary\\users.txt";
+
     File path = new File("./src/main/java/ro/iteahome/eLibrary/users.txt");
     public ReaderProfileDao() {
     }
@@ -27,9 +27,10 @@ public class ReaderProfileDao {
 
         while ((line = br.readLine()) != null) {
 
-            String[] stringInfo = line.split("; ");
+            String[] stringInfo = line.split(";");
                         if(name.equals(stringInfo[1]))
             {
+                System.out.println();
                 System.out.println("Reader ID is: "+stringInfo[0]+"\n");
                 System.out.println("Reader name is: "+stringInfo[1]+"\n");
                 System.out.println("Reader email is: "+stringInfo[3]+"\n");
