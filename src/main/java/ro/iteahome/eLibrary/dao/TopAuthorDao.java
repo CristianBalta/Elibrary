@@ -11,7 +11,7 @@ public class TopAuthorDao {
     File path = new File("./src/main/java/ro/iteahome/eLibrary/loans.txt");
 
     public ArrayList<String> topAuthorList = new ArrayList<>();
-    public ArrayList<String> demoBook = new ArrayList<>();
+    
 
 
     public String topAuthor;

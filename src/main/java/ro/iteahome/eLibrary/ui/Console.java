@@ -126,7 +126,7 @@ public class Console {
             switch (optiune) {
                 case "1":
                     System.out.println("Ai ales optiunea 1");
-                   // new Top5Books().executa();
+                    TopFiveBooks topFiveBooks = new TopFiveBooks();
                     // in progress Top 5 books as per number of people who borrowed them
                     break;
                 case "2":
