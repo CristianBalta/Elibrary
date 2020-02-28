@@ -10,13 +10,14 @@ import java.util.Scanner;
 
 public class UserDao {
 
-    private static final String USERS_FILE = "D:\\ITeaHome\\eLibrary\\src\\main\\java\\ro\\iteahome\\eLibrary\\users.txt";
+    //private static final String USERS_FILE = "C:\\Users\\Patrick\\IdeaProjects\\team-project-elibrary\\src\\main\\java\\ro\\iteahome\\eLibrary\\users.txt";
+    File path = new File("./src/main/java/ro/iteahome/eLibrary/users.txt");
 
     public List<User> readAllUsers() throws LibraryTechnicalException {
         List<User> userList = new ArrayList<>();
         Scanner scannerText=null;
         try {
-            scannerText=new Scanner(new BufferedReader(new FileReader(USERS_FILE)));
+            scannerText=new Scanner(new BufferedReader(new FileReader(path)));
             String userLine="";
             while(scannerText.hasNextLine()){
                 userLine = scannerText.nextLine();
@@ -32,7 +33,7 @@ public class UserDao {
 
     public void writeUserToFile(User user) throws LibraryTechnicalException {
 
-        try (FileWriter fileWriter = new FileWriter(USERS_FILE, true);
+        try (FileWriter fileWriter = new FileWriter(path, true);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             bufferedWriter.newLine();
             String userId = String.valueOf(user.getUserId());

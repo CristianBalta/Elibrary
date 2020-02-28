@@ -7,8 +7,8 @@ import java.util.*;
 
 public class TopAuthorDao {
 
-    private static final String LOANS_FILE = "/Users/cristianbalta/Desktop/team-project-elibrary/src/main/java/ro/iteahome/eLibrary/loans.txt";
-
+    //private static final String LOANS_FILE = "/Users/cristianbalta/Desktop/team-project-elibrary/src/main/java/ro/iteahome/eLibrary/loans.txt";
+    File path = new File("./src/main/java/ro/iteahome/eLibrary/loans.txt");
 
     public ArrayList<String> topAuthorList = new ArrayList<>();
     public ArrayList<String> demoBook = new ArrayList<>();
@@ -22,7 +22,7 @@ public class TopAuthorDao {
 
 
     public void computeTopAuthor() throws IOException {
-        FileReader reader = new FileReader(LOANS_FILE);
+        FileReader reader = new FileReader(path);
         BufferedReader br = new BufferedReader(reader);
 
         String line = null;

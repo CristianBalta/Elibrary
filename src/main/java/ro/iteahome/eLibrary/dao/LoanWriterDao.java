@@ -3,14 +3,13 @@ package ro.iteahome.eLibrary.dao;
 import ro.iteahome.eLibrary.model.Book;
 
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.List;
 
 
 public class LoanWriterDao {
 
-    private static final String LOANS_FILE = "/Users/cristianbalta/Desktop/team-project-elibrary/src/main/java/ro/iteahome/eLibrary/loans.txt";
-
+    //private static final String LOANS_FILE = "/Users/cristianbalta/Desktop/team-project-elibrary/src/main/java/ro/iteahome/eLibrary/loans.txt";
+    File path = new File("./src/main/java/ro/iteahome/eLibrary/loans.txt");
 
     public int loaniddao = 0;
     public int loanuseriddao;
@@ -28,7 +27,7 @@ public class LoanWriterDao {
 
     public void loanToFile() throws IOException {
         String lastLineIndex = null;
-        FileReader reader = new FileReader(LOANS_FILE);
+        FileReader reader = new FileReader(path);
         BufferedReader br = new BufferedReader(reader);
 
         {
@@ -43,7 +42,7 @@ public class LoanWriterDao {
         }
         br.close();
 
-        FileWriter writer = new FileWriter(LOANS_FILE, true);
+        FileWriter writer = new FileWriter(path, true);
         BufferedWriter bw = new BufferedWriter(writer);
 
         {

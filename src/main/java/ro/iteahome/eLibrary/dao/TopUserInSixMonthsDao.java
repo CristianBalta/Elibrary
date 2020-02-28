@@ -1,13 +1,16 @@
 package ro.iteahome.eLibrary.dao;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TopUserInSixMonthsDao {
-    private static final String LOANS_FILE = "C:\\Users\\Patrick\\IdeaProjects\\team-project-elibrary\\src\\main\\java\\ro\\iteahome\\eLibrary\\loans.txt";
+   // private static final String LOANS_FILE = "C:\\Users\\Patrick\\IdeaProjects\\team-project-elibrary\\src\\main\\java\\ro\\iteahome\\eLibrary\\loans.txt";
+    File pathLoans = new File("./src/main/java/ro/iteahome/eLibrary/loans.txt");
+    File pathUsers = new File("./src/main/java/ro/iteahome/eLibrary/users.txt");
     public String idUserString;
     public String bookLoansString;
     public Calendar sixMonthsAgo=new GregorianCalendar();
@@ -17,14 +20,16 @@ public class TopUserInSixMonthsDao {
     public Date date;
     public int sum=0;
     public int idUser=0;
-    public int topUser =0;
+    public String topUser ;
+    public int id=0;
+    public String idString;
 
     public TopUserInSixMonthsDao(){
 
     }
 
     public void computeTopUserInSixMonths() throws IOException {
-        FileReader reader = new FileReader(LOANS_FILE);
+        FileReader reader = new FileReader(pathLoans);
         BufferedReader br = new BufferedReader(reader);
 
         String line = null;
@@ -67,7 +72,28 @@ public class TopUserInSixMonthsDao {
             }
         }
 
-        topUser = maxEntry.getKey();
+        id = maxEntry.getKey();
+        idString=Integer.toString(id);
+
+
+        FileReader reader1 = new FileReader(pathUsers);
+        BufferedReader br1 = new BufferedReader(reader1);
+
+        String line1 = null;
+
+
+        while ((line1 = br1.readLine()) != null) {
+
+            String[] stringInfo = line1.split("; ");
+            if(idString.equals(stringInfo[0]))
+            {
+               topUser=stringInfo[1];
+                break;
+            }
+
+        }
+        br1.close();
+
 
     }
 }

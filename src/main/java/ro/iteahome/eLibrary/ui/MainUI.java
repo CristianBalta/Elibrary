@@ -1,5 +1,6 @@
 package ro.iteahome.eLibrary.ui;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MainUI {
@@ -11,7 +12,7 @@ public class MainUI {
         System.out.println();
     }
 
-    public void start() {
+    public void start() throws IOException {
 
         System.out.println("1.SignUp");
         System.out.println("2.LogIn");

@@ -1,16 +1,20 @@
 package ro.iteahome.eLibrary.dao;
 
 
-import ro.iteahome.eLibrary.service.AuthorPopularBooks;
-
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class AuthorPopularBooksDao {
 
-    private static final String LOANS_FILE = "/Users/cristianbalta/Desktop/team-project-elibrary/src/main/java/ro/iteahome/eLibrary/loans.txt";
-
+    //private static final String LOANS_FILE = "/Users/cristianbalta/Desktop/team-project-elibrary/src/main/java/ro/iteahome/eLibrary/loans.txt";
+    File path = new File("./src/main/java/ro/iteahome/eLibrary/loans.txt");
 
     public Map<String, String> booksMap = new HashMap<>();
     public List<String[]> authorsListMap = new ArrayList<>();
@@ -27,7 +31,7 @@ public class AuthorPopularBooksDao {
     public void computeTopAuthorBooks() throws IOException {
 
 
-        FileReader reader = new FileReader(LOANS_FILE);
+        FileReader reader = new FileReader(path);
         BufferedReader br = new BufferedReader(reader);
 
         String line = null;

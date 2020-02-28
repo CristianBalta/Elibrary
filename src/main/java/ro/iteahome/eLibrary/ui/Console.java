@@ -6,9 +6,10 @@ import ro.iteahome.eLibrary.exception.LibraryTechnicalException;
 import ro.iteahome.eLibrary.exception.LibraryUserExistsAlready;
 import ro.iteahome.eLibrary.exception.LibraryWrongCredentialException;
 import ro.iteahome.eLibrary.model.User;
-import ro.iteahome.eLibrary.service.UserService;
+import ro.iteahome.eLibrary.service.*;
 import ro.iteahome.eLibrary.ui.userValidator.UserValidator;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 //import ro.iteahome.eLibrary.service.Top5Books;
@@ -58,7 +59,7 @@ public class Console {
         }
     }
 
-    public void displayLogin() {
+    public void displayLogin() throws IOException {
         System.out.println("LOG IN");
         System.out.println("Login Name: ");
          name = scanner.nextLine();
@@ -88,7 +89,7 @@ public class Console {
 
     }
 
-    private void showMenuAdmin() {
+    private void showMenuAdmin() throws IOException {
         System.out.println();
         System.out.println("1. Top 5 books as per number of people who borrowed them ");
         System.out.println("2. The most read author");
@@ -115,7 +116,7 @@ public class Console {
         System.out.print("Choose an option: ");
     }
 
-    public void startConsole() {
+    public void startConsole() throws IOException {
 
         etichetaWhile:
         while (true) {
@@ -130,21 +131,29 @@ public class Console {
                     break;
                 case "2":
                     // in progress The most read author
+                    TopAuthor topAuthor=new TopAuthor();
                     break;
                 case "3":
                     // in progress Given the author name, search for his most popular books
+                    AuthorPopularBooks authorPopularBooks=new AuthorPopularBooks();
+
                     break;
                 case "A4":
                     // A4. The user who borrowed the most books in the last 6 months
+                    TopUserInSixMonths topUserInSixMonth=new TopUserInSixMonths();
                     break;
                 case "A5":
                     // A5. Add a loan to the list of borrowed books
+                    LoanWriterUI loanWriterUI=new LoanWriterUI();
+
                     break;
                 case "A6":
                     // A6. Given a user, show thh most common day of the week when he borrowed books
+                    CommonDay commonDay=new CommonDay();
                     break;
                 case "R4":
                     // R4. User profile for the currently logged in user
+                    ReaderProfile readerProfile=new ReaderProfile();
                     break;
 
                 case "x":
