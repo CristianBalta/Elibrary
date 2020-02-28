@@ -25,9 +25,9 @@ public class UserValidator {
         matcherPass = patternPass.matcher(password);
         boolean matchesPass = matcherPass.matches();
 
-        if (matchesName == false)
+        if (!matchesName)
             throw new LibraryInvalidUserInputDateException("Incorect user name format : 3-15 characters / only a-z, 0-9");
-        else if (matchesPass == false)
+        else if (!matchesPass)
             throw new LibraryInvalidUserInputDateException("Incorect password format :  at least one lowercase letter, digit, special char, capital letter, 6-16 length");
 
             /*

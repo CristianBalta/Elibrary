@@ -9,23 +9,27 @@ import ro.iteahome.eLibrary.model.User;
 import ro.iteahome.eLibrary.service.*;
 import ro.iteahome.eLibrary.ui.userValidator.UserValidator;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-//import ro.iteahome.eLibrary.service.Top5Books;
 
 public class Console {
 
-    //private static final AtomicInteger count = new AtomicInteger(1);
 
     private UserDao userDao = new UserDao();
     private UserService userService = new UserService();
     private UserValidator userValidator = new UserValidator();
-    public static String  name;
-
+    public static String name;
+    public User user1 = null;
     public Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
+    File path = new File("./src/main/java/ro/iteahome/eLibrary/users.txt");
+    public int userId;
 
-    public void displaySignUp() {
+
+    public void displaySignUp() throws IOException {
         System.out.println("SIGN UP");
         System.out.println("Enter the name :");
         String name = scanner.nextLine();
@@ -37,17 +41,36 @@ public class Console {
         int role = scanner.nextInt();
 
 
+        String lastLineIndex = null;
+
+        FileReader reader = new FileReader(path);
+        BufferedReader br = new BufferedReader(reader);
+
+        {
+            String line = null;
+
+            while ((line = br.readLine()) != null) {
+                lastLineIndex = line.substring(0, 1);
+            }
+
+
+            userId = Integer.parseInt(lastLineIndex) + 1;
+        }
+        br.close();
+
         try {
-            //userValidator.validateUserCredentials(email, password);
-           // User user2 = new User((userDao.readAllUsers().size())+1,name,email,password,role);
-            //User user2 = new User(count.incrementAndGet(),name,email,password,role);
-            User user2 = new User(0,name,email,password,role);
-            //userValidator.validateUserCredentials(user2.getName(), user2.getPassword());
+
+
+            // userValidator.validateUserCredentials(email, password);
+
+
+            User user2 = new User(userId, name, email, password, role);
             userService.signUp(user2);
-            System.out.println("User " + email +" is successfully registered now!!! ");
+            System.out.println("User " + email + " is successfully registered now!!! ");
             System.out.println("...................................................");
-            //System.out.println(user2.getUserId() + user2.getName() +user2.getEmail()+user2.getPassword()+user2.getRole());
-        } catch (LibraryUserExistsAlready e){
+
+
+        } catch (LibraryUserExistsAlready e) {
             System.out.println("User already exists! ");
         } catch (LibraryWrongCredentialException e) {
             System.out.println("Invalid credentials ! ");
@@ -62,11 +85,12 @@ public class Console {
     public void displayLogin() throws IOException {
         System.out.println("LOG IN");
         System.out.println("Login Name: ");
-         name = scanner.nextLine();
+        name = scanner.nextLine();
         System.out.println("Login Password: ");
         String password = scanner.nextLine();
 
         User user = null;
+
 
         try {
             user = userService.login(name, password);
@@ -74,12 +98,12 @@ public class Console {
         } catch (LibraryWrongCredentialException e) {
             System.out.println("Wrong Credentials");
         } catch (LibraryTechnicalException e) {
-           // e.printStackTrace();
-            System.out.println("A system error appeared. Please contact your administrator; "+e.getMessage());
+            System.out.println("A system error appeared. Please contact your administrator; " + e.getMessage());
         } catch (LibraryException e) {
             e.printStackTrace();
         }
 
+        user1 = user;
 
         if (user.isAdmin()) {
             showMenuAdmin();
@@ -91,29 +115,35 @@ public class Console {
 
     private void showMenuAdmin() throws IOException {
         System.out.println();
-        System.out.println("1. Top 5 books as per number of people who borrowed them ");
-        System.out.println("2. The most read author");
-        System.out.println("3. Given the author name, search for his most popular books");
+        System.out.println("Choose the desired action!");
+        System.out.println();
 
-        System.out.println("A4. The user who borrowed the most books in the last 6 months");
-        System.out.println("A5. Add a loan to the list of borrowed books");
-        System.out.println("A6. Given a user, show thh most common day of the week when he borrowed books");
+        System.out.println("1. Top 5 books as per number of people who borrowed them.");
+        System.out.println("2. The most read author.");
+        System.out.println("3. Given the author name, search for his most popular books.");
+
+        System.out.println("A4. The user which borrowed the most books in the last 6 months.");
+        System.out.println("A5. Add a loan to the list of borrowed books.");
+        System.out.println("A6. Given a user, show the most common day of the week when he borrowed books.");
         System.out.println("x. Exit");
         System.out.println();
         System.out.print("Choose an option: ");
         startConsole();
     }
 
-    private void showMenuReader() {
+    private void showMenuReader() throws IOException {
         System.out.println();
-        System.out.println("1. Top 5 books as per number of people who borrowed them ");
-        System.out.println("2. The most read author");
-        System.out.println("3. Given the author name, search for his most popular books");
+        System.out.println("Choose the desired action!");
+        System.out.println();
+        System.out.println("1. Top 5 books as per number of people who borrowed them.");
+        System.out.println("2. The most read author.");
+        System.out.println("3. Given the author name, search for his most popular books.");
 
-        System.out.println("R4. User profile for the currently logged in user");
+        System.out.println("R4. User profile for the currently logged in user.");
         System.out.println("x. Exit");
         System.out.println();
         System.out.print("Choose an option: ");
+        startConsole();
     }
 
     public void startConsole() throws IOException {
@@ -123,37 +153,75 @@ public class Console {
             //displayLogin();
 
             String optiune = scanner.next();
+
             switch (optiune) {
                 case "1":
-                    System.out.println("Ai ales optiunea 1");
-                   // new Top5Books().executa();
+                    TopFiveBooks topFiveBooks = new TopFiveBooks();
+
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
+
                     // in progress Top 5 books as per number of people who borrowed them
+
                     break;
                 case "2":
                     // in progress The most read author
-                    TopAuthor topAuthor=new TopAuthor();
+                    TopAuthor topAuthor = new TopAuthor();
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
                     break;
                 case "3":
                     // in progress Given the author name, search for his most popular books
-                    AuthorPopularBooks authorPopularBooks=new AuthorPopularBooks();
+                    AuthorPopularBooks authorPopularBooks = new AuthorPopularBooks();
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
 
                     break;
                 case "A4":
                     // A4. The user who borrowed the most books in the last 6 months
-                    TopUserInSixMonths topUserInSixMonth=new TopUserInSixMonths();
+                    TopUserInSixMonths topUserInSixMonth = new TopUserInSixMonths();
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
                     break;
                 case "A5":
                     // A5. Add a loan to the list of borrowed books
-                    LoanWriterUI loanWriterUI=new LoanWriterUI();
+                    LoanWriterUI loanWriterUI = new LoanWriterUI();
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
 
                     break;
                 case "A6":
                     // A6. Given a user, show thh most common day of the week when he borrowed books
-                    CommonDay commonDay=new CommonDay();
+                    CommonDay commonDay = new CommonDay();
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
                     break;
                 case "R4":
                     // R4. User profile for the currently logged in user
-                    ReaderProfile readerProfile=new ReaderProfile();
+                    ReaderProfile readerProfile = new ReaderProfile();
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
                     break;
 
                 case "x":
