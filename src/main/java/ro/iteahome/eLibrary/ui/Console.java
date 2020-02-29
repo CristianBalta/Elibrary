@@ -64,6 +64,7 @@ public class Console {
             //  userValidator.validateUserCredentials(email, password);
 
 
+
             User user2 = new User(userId, name, email, password, role);
             userService.signUp(user2);
             System.out.println("User " + email + " is successfully registered now!!! ");

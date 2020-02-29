@@ -40,7 +40,6 @@ public class ReaderProfileDao {
         }
 
         br.close();
-
     }
 
 }
