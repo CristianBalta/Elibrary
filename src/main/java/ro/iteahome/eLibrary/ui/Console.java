@@ -5,6 +5,8 @@ import ro.iteahome.eLibrary.exception.LibraryException;
 import ro.iteahome.eLibrary.exception.LibraryTechnicalException;
 import ro.iteahome.eLibrary.exception.LibraryUserExistsAlready;
 import ro.iteahome.eLibrary.exception.LibraryWrongCredentialException;
+import ro.iteahome.eLibrary.model.Admin;
+import ro.iteahome.eLibrary.model.Reader;
 import ro.iteahome.eLibrary.model.User;
 import ro.iteahome.eLibrary.service.*;
 import ro.iteahome.eLibrary.ui.userValidator.UserValidator;
@@ -61,7 +63,8 @@ public class Console {
         try {
 
 
-           //  userValidator.validateUserCredentials(email, password);
+            //  userValidator.validateUserCredentials(email, password);
+
 
 
             User user2 = new User(userId, name, email, password, role);
@@ -121,11 +124,11 @@ public class Console {
         System.out.println("1. Top 5 books as per number of people who borrowed them.");
         System.out.println("2. The most read author.");
         System.out.println("3. Given the author name, search for his most popular books.");
-        System.out.println("4. Show books list.");
 
         System.out.println("A4. The user which borrowed the most books in the last 6 months.");
         System.out.println("A5. Add a loan to the list of borrowed books.");
         System.out.println("A6. Given a user, show the most common day of the week when he borrowed books.");
+        System.out.println("A7. Given a user, show the loans list for that user.");
         System.out.println("x. Exit");
         System.out.println();
         System.out.print("Choose an option: ");
@@ -139,7 +142,6 @@ public class Console {
         System.out.println("1. Top 5 books as per number of people who borrowed them.");
         System.out.println("2. The most read author.");
         System.out.println("3. Given the author name, search for his most popular books.");
-        System.out.println("4. Show book list.");
 
         System.out.println("R4. User profile for the currently logged in user.");
         System.out.println("x. Exit");
@@ -154,11 +156,21 @@ public class Console {
         while (true) {
             //displayLogin();
 
+
+
+
             String optiune = scanner.next();
 
             switch (optiune) {
                 case "1":
-                    TopFiveBooks topFiveBooks = new TopFiveBooks();
+
+                    if (user1.isAdmin()) {
+                        Admin admin = new Admin(1);
+                        admin.topFiveBooks();
+                    } else {
+                        Reader reader = new Reader(2);
+                        reader.topFiveBooks();
+                    }
 
                     if (user1.isAdmin()) {
                         showMenuAdmin();
@@ -166,12 +178,19 @@ public class Console {
                         showMenuReader();
                     }
 
-                    // in progress Top 5 books as per number of people who borrowed them
 
                     break;
                 case "2":
-                    // in progress The most read author
-                    TopAuthor topAuthor = new TopAuthor();
+
+                    if (user1.isAdmin()) {
+                        Admin admin = new Admin(1);
+                        admin.topAuthor();
+                    } else {
+                        Reader reader = new Reader(2);
+                        reader.topAuthor();
+                    }
+
+
                     if (user1.isAdmin()) {
                         showMenuAdmin();
                     } else {
@@ -179,18 +198,13 @@ public class Console {
                     }
                     break;
                 case "3":
-                    // in progress Given the author name, search for his most popular books
-                    AuthorPopularBooks authorPopularBooks = new AuthorPopularBooks();
                     if (user1.isAdmin()) {
-                        showMenuAdmin();
+                        Admin admin = new Admin(1);
+                        admin.authorPoplarBooks();
                     } else {
-                        showMenuReader();
+                        Reader reader = new Reader(2);
+                        reader.authorPoplarBooks();
                     }
-
-                    break;
-                case "4":
-                    // in progress Given the author name, search for his most popular books
-                    BookList bookList = new BookList();
                     if (user1.isAdmin()) {
                         showMenuAdmin();
                     } else {
@@ -199,41 +213,35 @@ public class Console {
 
                     break;
                 case "A4":
-                    // A4. The user who borrowed the most books in the last 6 months
-                    TopUserInSixMonths topUserInSixMonth = new TopUserInSixMonths();
-                    if (user1.isAdmin()) {
-                        showMenuAdmin();
-                    } else {
-                        showMenuReader();
-                    }
+
+                    Admin admin = new Admin(1);
+                    admin.topUserInSixMonths();
+                    showMenuAdmin();
+
                     break;
                 case "A5":
-                    // A5. Add a loan to the list of borrowed books
-                    LoanWriterUI loanWriterUI = new LoanWriterUI();
-                    if (user1.isAdmin()) {
-                        showMenuAdmin();
-                    } else {
-                        showMenuReader();
-                    }
+                    Admin admin1 = new Admin(1);
+                    admin1.loanWriter();
+                    showMenuAdmin();
 
                     break;
                 case "A6":
-                    // A6. Given a user, show thh most common day of the week when he borrowed books
-                    CommonDay commonDay = new CommonDay();
-                    if (user1.isAdmin()) {
-                        showMenuAdmin();
-                    } else {
-                        showMenuReader();
-                    }
+                    Admin admin2 = new Admin(1);
+                    admin2.commonDay();
+                    showMenuAdmin();
+
+                    break;
+                    case "A7":
+                    Admin admin3 = new Admin(1);
+                    admin3.borrowedBooks();
+                    showMenuAdmin();
+
                     break;
                 case "R4":
-                    // R4. User profile for the currently logged in user
-                    ReaderProfile readerProfile = new ReaderProfile();
-                    if (user1.isAdmin()) {
-                        showMenuAdmin();
-                    } else {
-                        showMenuReader();
-                    }
+                    Reader reader1 = new Reader(2);
+                    reader1.readerProfile();
+                    showMenuReader();
+
                     break;
 
                 case "x":
