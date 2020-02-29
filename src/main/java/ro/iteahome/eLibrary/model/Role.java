@@ -1,14 +1,16 @@
 package ro.iteahome.eLibrary.model;
 
+import java.io.IOException;
+
 public abstract class Role {
     private int roleId;
-    private String name;
+
 
     // 1- Admin ; 2 - Reader
 
-    Role(int roleId, String name) {
+    Role(int roleId) {
         this.roleId = roleId;
-        this.name = name;
+
     }
 
     public int getRoleId() {
@@ -19,16 +21,14 @@ public abstract class Role {
         this.roleId = roleId;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public abstract void searchBook();
-    public abstract void top5Books();
-    public abstract void mostReadAuthor();
-    public abstract void popularBook(Author author);
+
+
+    public abstract void topFiveBooks() throws IOException;
+    public abstract void topAuthor() throws IOException;
+    public abstract void authorPoplarBooks() throws IOException;
+
+
+
 }

@@ -3,9 +3,7 @@ package ro.iteahome.eLibrary.ui;
 import ro.iteahome.eLibrary.dao.BorrowedBooksDao;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class BorrowedBooksUI {
     public int userid;
@@ -15,7 +13,8 @@ public class BorrowedBooksUI {
         BorrowedBooksDao borrowedBooksDao = new BorrowedBooksDao(userid);
         borrowedBooksDao.showBookList();
         System.out.println("The loan list for the user with the id "+userid+" is: \n");
-        System.out.println(borrowedBooksDao.booksLoaned);
+        String books = String.valueOf(borrowedBooksDao.booksLoaned);
+        System.out.println(books.substring(1,books.length()-1));
     }
 
 }

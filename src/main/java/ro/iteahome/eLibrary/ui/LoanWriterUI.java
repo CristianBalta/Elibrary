@@ -9,7 +9,6 @@ import ro.iteahome.eLibrary.dao.LoanWriterDao;
 import ro.iteahome.eLibrary.model.Author;
 import ro.iteahome.eLibrary.model.Book;
 import ro.iteahome.eLibrary.model.Loan;
-import ro.iteahome.eLibrary.service.LoanWriter;
 
 
 public class LoanWriterUI {
@@ -63,7 +62,7 @@ public class LoanWriterUI {
 
         LoanWriterDao loanui = new LoanWriterDao(loan.getUserId(), strDate, loan.getBookList());
 
-        LoanWriter loanWriter = new LoanWriter(loanui);
+        loanui.loanToFile();
 
 
     }
