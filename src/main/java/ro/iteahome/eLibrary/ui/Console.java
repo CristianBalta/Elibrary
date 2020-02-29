@@ -126,6 +126,7 @@ public class Console {
         System.out.println("A4. The user which borrowed the most books in the last 6 months.");
         System.out.println("A5. Add a loan to the list of borrowed books.");
         System.out.println("A6. Given a user, show the most common day of the week when he borrowed books.");
+        System.out.println("A7. Given a user, show the loans list for that user.");
         System.out.println("x. Exit");
         System.out.println();
         System.out.print("Choose an option: ");
@@ -209,6 +210,19 @@ public class Console {
                 case "A6":
                     // A6. Given a user, show thh most common day of the week when he borrowed books
                     CommonDay commonDay = new CommonDay();
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
+                    break;case "A7":
+                    // A6. Given a user, show thh most common day of the week when he borrowed books
+                    Scanner s = new Scanner(System.in);
+
+                    System.out.println("What is the id of the user?");
+                    int userid = s.nextInt();
+                    s.nextLine();
+                    BorrowedBooks borrowedBooks = new BorrowedBooks(userid);
                     if (user1.isAdmin()) {
                         showMenuAdmin();
                     } else {

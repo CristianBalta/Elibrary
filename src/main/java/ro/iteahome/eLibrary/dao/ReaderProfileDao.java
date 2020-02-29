@@ -1,5 +1,6 @@
 package ro.iteahome.eLibrary.dao;
 
+import ro.iteahome.eLibrary.service.BorrowedBooks;
 import ro.iteahome.eLibrary.ui.Console;
 
 import java.io.BufferedReader;
@@ -34,6 +35,7 @@ public class ReaderProfileDao {
                 System.out.println("Reader ID is: "+stringInfo[0]+"\n");
                 System.out.println("Reader name is: "+stringInfo[1]+"\n");
                 System.out.println("Reader email is: "+stringInfo[3]+"\n");
+                BorrowedBooks borrowedBooks = new BorrowedBooks(Integer.parseInt(stringInfo[0]));
                 break;
             }
 
