@@ -1,0 +1,5 @@
+1;c1;Julia Phillips;Disappearing Earth
+2;c2;Ben Lerner;The Topeka School
+3;c3;Ted Chiang;Exhalation
+4;c4;Valeria Luiselli;Lost Children Archive
+5;c5; Kevin Barry;Night Boat to Tangier
