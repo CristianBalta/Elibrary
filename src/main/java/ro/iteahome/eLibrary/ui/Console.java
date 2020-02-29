@@ -61,7 +61,7 @@ public class Console {
         try {
 
 
-            // userValidator.validateUserCredentials(email, password);
+           //  userValidator.validateUserCredentials(email, password);
 
 
             User user2 = new User(userId, name, email, password, role);

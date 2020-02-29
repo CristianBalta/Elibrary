@@ -4,3 +4,4 @@
 3;marian;password;marian@email;1;
 4;vasi;password;vasi@email;2;
 5;razvan;password;razvan@email;1;
+6;gigi;password;gigi@email;1;
