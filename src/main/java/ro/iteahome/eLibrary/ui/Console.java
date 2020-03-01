@@ -131,6 +131,7 @@ public class Console {
         System.out.println("1. Top 5 books as per number of people who borrowed them.");
         System.out.println("2. The most read author.");
         System.out.println("3. Given the author name, search for his most popular books.");
+        System.out.println("4. Show books list.");
 
         System.out.println("A4. The user which borrowed the most books in the last 6 months.");
         System.out.println("A5. Add a loan to the list of borrowed books.");
@@ -149,6 +150,7 @@ public class Console {
         System.out.println("1. Top 5 books as per number of people who borrowed them.");
         System.out.println("2. The most read author.");
         System.out.println("3. Given the author name, search for his most popular books.");
+        System.out.println("4. Show book list.");
 
         System.out.println("R4. User profile for the currently logged in user.");
         System.out.println("M. Menu");
@@ -212,6 +214,16 @@ public class Console {
                         Reader reader = new Reader(2);
                         reader.authorPoplarBooks();
                     }
+                    if (user1.isAdmin()) {
+                        showMenuAdmin();
+                    } else {
+                        showMenuReader();
+                    }
+
+                    break;
+                case "4":
+                    // in progress Given the author name, search for his most popular books
+                    BookList bookList = new BookList();
                     if (user1.isAdmin()) {
                         showMenuAdmin();
                     } else {
