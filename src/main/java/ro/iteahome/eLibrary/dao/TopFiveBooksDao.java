@@ -49,9 +49,12 @@ public class TopFiveBooksDao {
             String[] rawBookA = rawBook;
 
             for (String rawBookAS : rawBookA) {
-                rawBookAS = rawBookAS.substring(0, rawBookAS.lastIndexOf(":"));
-                booksMap.put(rawBookAS, null);
-                bookList.add(rawBookAS);
+                if (rawBookAS !=null|| rawBookAS !="")
+                {
+                    rawBookAS = rawBookAS.substring(0, rawBookAS.lastIndexOf(":"));
+                    booksMap.put(rawBookAS, null);
+                    bookList.add(rawBookAS);
+                }
 
             }
 

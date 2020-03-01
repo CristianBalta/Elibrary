@@ -5,3 +5,8 @@
 4;vasi;password;vasi@email;2;
 5;razvan;password;razvan@email;1;
 6;gigi;password;gigi@email;1;
+7;lucia;password;lucia@email;1;
+8;valentin;password;valentin@email;2;
+9;marian;password;marian@email;1;
+10;flavius;password;flavius@email;2;
+11;dan;password;dan@email;1;

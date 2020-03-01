@@ -39,7 +39,7 @@ public class Console {
         String email = scanner.nextLine();
         System.out.println("Enter the password associated with the email: ");
         String password = scanner.nextLine();
-        System.out.println("Enter role");
+        System.out.println("Enter role(1 for Admin/ 2 for User)");
         int role = scanner.nextInt();
 
 
@@ -52,13 +52,15 @@ public class Console {
             String line = null;
 
             while ((line = br.readLine()) != null) {
-                lastLineIndex = line.substring(0, 1);
-            }
+                lastLineIndex = line.split(";")[0];            }
 
 
             userId = Integer.parseInt(lastLineIndex) + 1;
         }
         br.close();
+
+
+
 
         try {
 
@@ -68,10 +70,15 @@ public class Console {
 
 
             User user2 = new User(userId, name, email, password, role);
+
+
+
             userService.signUp(user2);
             System.out.println("User " + email + " is successfully registered now!!! ");
             System.out.println("...................................................");
-
+            MainUI mainUI = new MainUI();
+            mainUI.showTitle();
+            mainUI.start();
 
         } catch (LibraryUserExistsAlready e) {
             System.out.println("User already exists! ");
@@ -129,7 +136,7 @@ public class Console {
         System.out.println("A5. Add a loan to the list of borrowed books.");
         System.out.println("A6. Given a user, show the most common day of the week when he borrowed books.");
         System.out.println("A7. Given a user, show the loans list for that user.");
-        System.out.println("x. Exit");
+        System.out.println("M. Menu");
         System.out.println();
         System.out.print("Choose an option: ");
         startConsole();
@@ -144,7 +151,7 @@ public class Console {
         System.out.println("3. Given the author name, search for his most popular books.");
 
         System.out.println("R4. User profile for the currently logged in user.");
-        System.out.println("x. Exit");
+        System.out.println("M. Menu");
         System.out.println();
         System.out.print("Choose an option: ");
         startConsole();
@@ -244,9 +251,12 @@ public class Console {
 
                     break;
 
-                case "x":
-                case "X":
-                    break etichetaWhile;
+                case "M": MainUI mainUI = new MainUI();
+                    mainUI.showTitle();
+                mainUI.start();break;
+                case "X": break etichetaWhile;
+
+
 
                 default:
                     System.out.println("Invalid option !");

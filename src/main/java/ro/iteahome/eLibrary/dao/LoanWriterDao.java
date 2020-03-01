@@ -34,7 +34,8 @@ public class LoanWriterDao {
             String line = null;
 
             while ((line = br.readLine()) != null) {
-                lastLineIndex = line.substring(0, 1);
+
+                lastLineIndex = line.split(";")[0];
             }
 
 
